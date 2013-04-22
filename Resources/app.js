@@ -20,8 +20,8 @@ var picker = Ti.UI.createPicker({
 });
 
 var thema = [];
-thema[0]=Ti.UI.createPickerRow({title:'Sport'});
-thema[1]=Ti.UI.createPickerRow({title:'Binnenstad'});
+thema[0]=Ti.UI.createPickerRow({title:'Sport', id:'0'});
+thema[1]=Ti.UI.createPickerRow({title:'Binnenstad', id:'1'});
 picker.add(thema);
 picker.selectionIndicator = true;
 
