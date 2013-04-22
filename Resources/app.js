@@ -10,12 +10,9 @@ Titanium.include('gebruikersToevoegen.js');
 // Database aanroepen
 var db = Ti.Database.install('quiz2.sqlite','crawlympics');
 
-Ti.UI.backgroundColor = 'white';
 var win = Ti.UI.createWindow({
-  exitOnClose: true,
-  layout: 'vertical'
+  backgroundColor: 'blue'
 });
-
 
 var btn1 = Ti.UI.createButton({
 	title:'SPORT',

@@ -10,10 +10,8 @@
 // Database aanroepen
 var db = Ti.Database.install('quiz2.sqlite','crawlympics');
 
-Ti.UI.backgroundColor = 'white';
-var win = Ti.UI.createWindow({
-  exitOnClose: true,
-  layout: 'vertical'
+var gebruikersToevoegen = Ti.UI.createWindow({
+  backgroundColor: 'blue'
 });
 
 
@@ -26,7 +24,4 @@ var btnSubmit = Ti.UI.createButton({
 	font:{fontFamily:'Arial',fontWeight:'bold',fontSize:14}
 });
 
-win.add(btnSubmit);
-
-
-win.open();
+gebruikersToevoegen.add(btnSubmit);
