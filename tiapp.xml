@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <property name="acs-oauth-secret-production" type="string">rn0yWAAgxpz9aSXdxubFVaHNQbi5abr6</property>
+    <property name="acs-oauth-key-production" type="string">j2Qq3KKZfaW4xNhL1qkcmaQEfY6WeiPR</property>
+    <property name="acs-api-key-production" type="string">puZKK984UNVy48Cr4VYzfvvEKQNvvyiX</property>
+    <property name="acs-oauth-secret-development" type="string">Y0R6gZCTAsJOLoyHCOU0Q0ncHWxKQpO0</property>
+    <property name="acs-oauth-key-development" type="string">rPWiwrmZtkNS2IFoAxqSarRSX00up0a1</property>
+    <property name="acs-api-key-development" type="string">jhmy660jPZeyNM91URng4Y4RsmMqv2er</property>
+    <id>nl.crawlympics</id>
+    <name>Crawlypmics</name>
+    <version>1.0</version>
+    <publisher>erikdegroot</publisher>
+    <url>http://www.crawlympics.nl</url>
+    <description>not specified</description>
+    <copyright>2013 by erikdegroot</copyright>
+    <icon>appicon.png</icon>
+    <persistent-wifi>false</persistent-wifi>
+    <prerendered-icon>false</prerendered-icon>
+    <statusbar-style>default</statusbar-style>
+    <statusbar-hidden>false</statusbar-hidden>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>74f105f1-e7cf-491c-88fb-d68e3466120c</guid>
+    <property name="ti.ui.defaultunit" type="string">system</property>
+    <iphone>
+        <orientations device="iphone">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+        </orientations>
+        <orientations device="ipad">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
+        </orientations>
+    </iphone>
+    <android xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <mobileweb>
+        <precache/>
+        <splash>
+            <enabled>true</enabled>
+            <inline-css-images>true</inline-css-images>
+        </splash>
+        <theme>default</theme>
+    </mobileweb>
+    <modules>
+        <module platform="commonjs">ti.cloud</module>
+    </modules>
+    <deployment-targets>
+        <target device="blackberry">false</target>
+        <target device="android">true</target>
+        <target device="ipad">true</target>
+        <target device="iphone">true</target>
+        <target device="mobileweb">true</target>
+    </deployment-targets>
+    <sdk-version>3.0.2.GA</sdk-version>
+</ti:app>
