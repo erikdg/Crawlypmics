@@ -17,8 +17,8 @@ var win = Ti.UI.createWindow({
 });
 
 
-var btnSubmit = Ti.UI.createButton({
-	title:'Start het spel',
+var btn1 = Ti.UI.createButton({
+	title:'SPORT',
 	top:130,
 	width:130,
 	height:35,
@@ -26,7 +26,25 @@ var btnSubmit = Ti.UI.createButton({
 	font:{fontFamily:'Arial',fontWeight:'bold',fontSize:14}
 });
 
-win.add(btnSubmit);
+var btn2 = Ti.UI.createButton({
+	title:'BINNENSTAD',
+	top:30,
+	width:130,
+	height:35,
+	borderRadius:1,
+	font:{fontFamily:'Arial',fontWeight:'bold',fontSize:14}
+});
+win.add(btn1);
+win.add(btn2);
+
+btn1.addEventListener('click',function(e) {
+	var theData = db.execute('INSERT INTO deelnemersgroep (themaID) VALUES ("1")');
+	gebruikers-toevoegen.open();
+});
+btn2.addEventListener('click',function(e) {
+	var theData = db.execute('INSERT INTO deelnemersgroep (themaID) VALUES ("2")');
+	gebruikers-toevoegen.open();
+});
 
 
 win.open();
