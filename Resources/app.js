@@ -5,6 +5,8 @@
  * I.o.v. Amsterdam Museum
  */
 
+Titanium.include('gebruikers-toevoegen.js');
+
 // Database aanroepen
 var db = Ti.Database.install('quiz2.sqlite','crawlympics');
 
@@ -15,8 +17,8 @@ var win = Ti.UI.createWindow({
 });
 
 
-var btn1 = Ti.UI.createButton({
-	title:'SPORT',
+var btnSubmit = Ti.UI.createButton({
+	title:'Start het spel',
 	top:130,
 	width:130,
 	height:35,
@@ -24,23 +26,7 @@ var btn1 = Ti.UI.createButton({
 	font:{fontFamily:'Arial',fontWeight:'bold',fontSize:14}
 });
 
-var btn2 = Ti.UI.createButton({
-	title:'BINNENSTAD',
-	top:30,
-	width:130,
-	height:35,
-	borderRadius:1,
-	font:{fontFamily:'Arial',fontWeight:'bold',fontSize:14}
-});
-win.add(btn1);
-win.add(btn2);
-
-btn1.addEventListener('click',function(e) {
-	var theData = db.execute('INSERT INTO deelnemersgroep (themaID) VALUES ("1")');
-});
-btn2.addEventListener('click',function(e) {
-	var theData = db.execute('INSERT INTO deelnemersgroep (themaID) VALUES ("2")');
-});
+win.add(btnSubmit);
 
 
 win.open();
