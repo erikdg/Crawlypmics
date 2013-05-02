@@ -31,6 +31,8 @@ var btn2 = Ti.UI.createButton({
 	borderRadius:1,
 	font:{fontFamily:'Arial',fontWeight:'bold',fontSize:14}
 });
+
+
 win.add(btn1);
 win.add(btn2);
 
