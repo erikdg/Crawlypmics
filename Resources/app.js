@@ -16,7 +16,7 @@ var win = Ti.UI.createWindow({
 
 var btn1 = Ti.UI.createButton({
 	title:'SPORT',
-	top:130,
+	top:30,
 	width:130,
 	height:35,
 	borderRadius:1,
@@ -25,7 +25,7 @@ var btn1 = Ti.UI.createButton({
 
 var btn2 = Ti.UI.createButton({
 	title:'BINNENSTAD',
-	top:30,
+	top:130,
 	width:130,
 	height:35,
 	borderRadius:1,

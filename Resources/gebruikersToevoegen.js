@@ -47,9 +47,11 @@ btnSubmit.addEventListener('click',function(e) {
 		var dbData = {
 			deelnemer_naam: deelnemer_naam.value
 		};
-		// var selectGroepID = db.execute('SELECT * FROM deelnemersgroep WHERE groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
-		var theData = db.execute('INSERT INTO deelnemers (naam, score) VALUES ("'+deelnemer_naam.value+'", 0)');
-		var theData = db.execute('INSERT INTO deelnemers (groepID) SELECT groepID FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
+		var sql = db.execute('SELECT groepID FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
+		var groepID = sql.fieldByName('groepID');
+		console.log(groepID);
+		var theData = db.execute('INSERT INTO deelnemers (naam, score, groepID) VALUES ("'+deelnemer_naam.value+'", 0, ?)', groepID);
+		// var theData = db.execute('INSERT INTO deelnemers (groepID) SELECT groepID FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
 		kaart.open();
 	};
 
