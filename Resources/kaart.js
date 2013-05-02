@@ -1,4 +1,4 @@
-var win = Titanium.UI.createWindow();
+var kaart = Titanium.UI.createWindow();
 
 var mountainView = Titanium.Map.createAnnotation({
     latitude:37.390749,
@@ -21,7 +21,7 @@ var mapview = Titanium.Map.createView({
     annotations:[mountainView]
 });
 
-win.add(mapview);
+kaart.add(mapview);
 // Handle click events on any annotations on this map.
 mapview.addEventListener('click', function(evt) {
 
@@ -34,4 +34,3 @@ mapview.addEventListener('click', function(evt) {
         Ti.API.info("Annotation " + evt.title + ", left button clicked.");
     }
 });
-win.open();
