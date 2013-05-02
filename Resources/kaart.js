@@ -35,15 +35,15 @@ var mapview = Titanium.Map.createView({
 kaart.add(mapview);
 
 
-// points = [
-	// {latitude:52.370216,longitude:4.895168},
-	// {latitude:52.361536,longitude:4.907894}
-// ]
+points = [
+	{latitude:52.370216,longitude:4.895168},
+	{latitude:52.361536,longitude:4.907894}
+]
 
 var allPoints = somePoints.concat(someOtherPoints);
 var route = {
 	name:"Test Route",
-	points:allPoints,
+	points:points,
 	color:"red",
 	width:2
 };
