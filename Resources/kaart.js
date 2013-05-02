@@ -39,8 +39,6 @@ points = [
 	{latitude:52.370216,longitude:4.895168},
 	{latitude:52.361536,longitude:4.907894}
 ]
-
-var allPoints = somePoints.concat(someOtherPoints);
 var route = {
 	name:"Test Route",
 	points:points,
