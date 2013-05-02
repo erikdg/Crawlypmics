@@ -5,7 +5,7 @@
  * I.o.v. Amsterdam Museum
  */
 
-
+Titanium.include('kaart.js');
 
 // Database aanroepen
 var db = Ti.Database.install('quiz2.sqlite','crawlympics');
@@ -25,3 +25,7 @@ var btnSubmit = Ti.UI.createButton({
 });
 
 gebruikersToevoegen.add(btnSubmit);
+
+btnSubmit.addEventListener('click',function(e) {
+	kaart.open();
+});

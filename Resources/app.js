@@ -5,7 +5,7 @@
  * I.o.v. Amsterdam Museum
  */
 
-Titanium.include('gebruikersToevoegen.js', 'kaart.js');
+Titanium.include('gebruikersToevoegen.js');
 
 // Database aanroepen
 var db = Ti.Database.install('quiz2.sqlite','crawlympics');
@@ -40,8 +40,7 @@ btn1.addEventListener('click',function(e) {
 });
 btn2.addEventListener('click',function(e) {
 	var theData = db.execute('INSERT INTO deelnemersgroep (themaID) VALUES ("2")');
-	// gebruikersToevoegen.open();
-	kaart.open();
+	gebruikersToevoegen.open();
 });
 
 
