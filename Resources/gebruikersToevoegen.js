@@ -16,12 +16,12 @@ var gebruikersToevoegen = Ti.UI.createWindow({
 
 var deelnemer_naam_1 = Ti.UI.createTextField({
     color:'#336699',
- 	top:'20dp',
+ 	top:'60dp',
     // left:'10dp',
     width:'300dp',
     height:'40dp',
     font: { fontSize : '14dp'},
-    hintText:'Vul hier je naam in',
+    hintText:'Naam eerste deelnemer...',
     keyboardType:Ti.UI.KEYBOARD_DEFAULT,
     borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 });
@@ -30,12 +30,12 @@ gebruikersToevoegen.add(deelnemer_naam_1);
 
 var deelnemer_naam_2 = Ti.UI.createTextField({
     color:'#336699',
-    top:'80dp',
+    top:'110dp',
     // left:'10dp',
     width:'300dp',
     height:'40dp',
     font: { fontSize : '14dp'},
-    hintText:'Vul hier je naam in',
+    hintText:'Naam tweede deelnemer...',
     keyboardType:Ti.UI.KEYBOARD_DEFAULT,
     borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 });
@@ -44,12 +44,12 @@ gebruikersToevoegen.add(deelnemer_naam_2);
 
 var deelnemer_naam_3 = Ti.UI.createTextField({
     color:'#336699',
-    top:'120dp',
+    top:'160dp',
     // left:'10dp',
     width:'300dp',
     height:'40dp',
     font: { fontSize : '14dp'},
-    hintText:'Vul hier je naam in',
+    hintText:'Naam derde deelnemer...',
     keyboardType:Ti.UI.KEYBOARD_DEFAULT,
     borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 });
@@ -58,12 +58,12 @@ gebruikersToevoegen.add(deelnemer_naam_3);
 
 var deelnemer_naam_4 = Ti.UI.createTextField({
     color:'#336699',
-    top:'200dp',
+    top:'210dp',
     // left:'10dp',
     width:'300dp',
     height:'40dp',
     font: { fontSize : '14dp'},
-    hintText:'Vul hier je naam in 4',
+    hintText:'Naam vierde deelnemer...',
     keyboardType:Ti.UI.KEYBOARD_DEFAULT,
     borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 });
@@ -71,21 +71,23 @@ var deelnemer_naam_4 = Ti.UI.createTextField({
 
 var deelnemer_naam_5 = Ti.UI.createTextField({
     color:'#336699',
-    top:'220dp',
+    top:'260dp',
     // left:'10dp',
     width:'300dp',
     height:'40dp',
     font: { fontSize : '14dp'},
-    hintText:'Vul hier je naam in 5',
+    hintText:'Naam vijfde deelnemer...',
     keyboardType:Ti.UI.KEYBOARD_DEFAULT,
     borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 });
 
 
+
 var btnAdd = Ti.UI.createButton({
-    title:'Add',
-    top:'250dp',
-    width:'220dp',
+    title:'+',
+    top:'310dp',
+ 	left:'10dp',
+    width:'50dp',
     height:'35dp',
     borderRadius:1,
     font:{fontFamily:'Arial',fontWeight:'bold',fontSize:14}
@@ -112,13 +114,12 @@ btnAdd.addEventListener('click',function(e) {
 
 
 
-
-
 var btnSubmit = Ti.UI.createButton({
     title:'Start het spel',
-    top:'320dp',
-    width:'220dp',
+    top:'360dp',
+    width:'190dp',
     height:'35dp',
+ 	right:'10dp',
     borderRadius:1,
     font:{fontFamily:'Arial',fontWeight:'bold',fontSize:14}
 });
@@ -140,6 +141,7 @@ btnSubmit.addEventListener('click',function(e) {
 		if (aantal == 4) {
 			var insertNaam4 = db.execute('INSERT INTO deelnemers (naam, score, groepID) VALUES ("'+deelnemer_naam_4.value+'", 0, ?)', groepID);
 		} else if (aantal == 5) {
+			var insertNaam4 = db.execute('INSERT INTO deelnemers (naam, score, groepID) VALUES ("'+deelnemer_naam_4.value+'", 0, ?)', groepID);
 			var insertNaam5 = db.execute('INSERT INTO deelnemers (naam, score, groepID) VALUES ("'+deelnemer_naam_5.value+'", 0, ?)', groepID);
 		} 
 		
