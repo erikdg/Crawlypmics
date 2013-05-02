@@ -44,7 +44,7 @@ gebruikersToevoegen.add(deelnemer_naam_2);
 
 var deelnemer_naam_3 = Ti.UI.createTextField({
     color:'#336699',
-    top:'150dp',
+    top:'120dp',
     // left:'10dp',
     width:'300dp',
     height:'40dp',
@@ -56,11 +56,67 @@ var deelnemer_naam_3 = Ti.UI.createTextField({
 
 gebruikersToevoegen.add(deelnemer_naam_3);
 
+var deelnemer_naam_4 = Ti.UI.createTextField({
+    color:'#336699',
+    top:'200dp',
+    // left:'10dp',
+    width:'300dp',
+    height:'40dp',
+    font: { fontSize : '14dp'},
+    hintText:'Vul hier je naam in 4',
+    keyboardType:Ti.UI.KEYBOARD_DEFAULT,
+    borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+});
+
+
+var deelnemer_naam_5 = Ti.UI.createTextField({
+    color:'#336699',
+    top:'220dp',
+    // left:'10dp',
+    width:'300dp',
+    height:'40dp',
+    font: { fontSize : '14dp'},
+    hintText:'Vul hier je naam in 5',
+    keyboardType:Ti.UI.KEYBOARD_DEFAULT,
+    borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+});
+
+
+var btnAdd = Ti.UI.createButton({
+    title:'Add',
+    top:'250dp',
+    width:'220dp',
+    height:'35dp',
+    borderRadius:1,
+    font:{fontFamily:'Arial',fontWeight:'bold',fontSize:14}
+});
+gebruikersToevoegen.add(btnAdd);
+
+
+
+
+
+var aantal = 3;
+
+btnAdd.addEventListener('click',function(e) {
+	if (aantal == 3) {
+		gebruikersToevoegen.add(deelnemer_naam_4);
+		aantal++;
+	} else if (aantal == 4) {
+		gebruikersToevoegen.add(deelnemer_naam_5);
+		aantal++;
+	} else if (aantal == 5) {
+		alert("Helaas kunnen er maar maximaal 5 speler mee doen. Je zou teams kunnen maken.");
+	};
+});
+
+
+
 
 
 var btnSubmit = Ti.UI.createButton({
     title:'Start het spel',
-    top:'200dp',
+    top:'320dp',
     width:'220dp',
     height:'35dp',
     borderRadius:1,
@@ -80,7 +136,12 @@ btnSubmit.addEventListener('click',function(e) {
 		console.log(groepID);
 		var insertNaam1 = db.execute('INSERT INTO deelnemers (naam, score, groepID) VALUES ("'+deelnemer_naam_1.value+'", 0, ?)', groepID);
 		var insertNaam2 = db.execute('INSERT INTO deelnemers (naam, score, groepID) VALUES ("'+deelnemer_naam_2.value+'", 0, ?)', groepID);
-		var insertNaam2 = db.execute('INSERT INTO deelnemers (naam, score, groepID) VALUES ("'+deelnemer_naam_3.value+'", 0, ?)', groepID);
+		var insertNaam3 = db.execute('INSERT INTO deelnemers (naam, score, groepID) VALUES ("'+deelnemer_naam_3.value+'", 0, ?)', groepID);
+		if (aantal == 4) {
+			var insertNaam4 = db.execute('INSERT INTO deelnemers (naam, score, groepID) VALUES ("'+deelnemer_naam_4.value+'", 0, ?)', groepID);
+		} else if (aantal == 5) {
+			var insertNaam5 = db.execute('INSERT INTO deelnemers (naam, score, groepID) VALUES ("'+deelnemer_naam_5.value+'", 0, ?)', groepID);
+		} 
 		
 		kaart.open();
 	};
