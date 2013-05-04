@@ -65,7 +65,7 @@ btnSubmit.addEventListener('click',function(e) {
 		} else if (strafregel_ronde1 !== null && strafregel_ronde2 === null && strafregel_ronde3 === null) {
 			var insertStrafregel = db.execute('UPDATE deelnemersgroep SET strafregel_ronde2 = "'+textField.value+'" WHERE groepID =?', groepID);
 		} else if (strafregel_ronde1 !== null && strafregel_ronde2 !== null && strafregel_ronde3 === null) {
-			var insertStrafregel = db.execute('UPDATE deelnemersgroep SET strafregel_ronde2 = "'+textField.value+'" WHERE groepID =?', groepID);
+			var insertStrafregel = db.execute('UPDATE deelnemersgroep SET strafregel_ronde3 = "'+textField.value+'" WHERE groepID =?', groepID);
 		} else {
 			alert('Hier gaat iets mis');
 		}
