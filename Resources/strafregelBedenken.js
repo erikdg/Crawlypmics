@@ -5,7 +5,7 @@
  * I.o.v. Amsterdam Museum
  */
 
-Titanium.include('kaart.js');
+Titanium.include('kaart_cafe_1.js');
 
 // Database aanroepen
 var db = Ti.Database.install('quiz2.sqlite','crawlympics');

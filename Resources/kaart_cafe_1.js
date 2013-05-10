@@ -1,10 +1,10 @@
 Ti.UI.setBackgroundColor('#000');
 
-var annotations2;
+var annotation;
 
-var straat;
-var plaats;
-var gebruikerLocatie;
+var street;
+var city;
+var userLocation;
 var places;
 var currentLongitude;
 var currentLatitude;
@@ -27,9 +27,9 @@ Titanium.Geolocation.purpose = "Recieve User Location";
         if (evt.success) {
             places = evt.places;
             if (places && places.length) {
-                straat = places[0].street;
-                plaats = places[0].city;
-                gebruikerLocatie = straat + " , " + plaats;
+                street = places[0].street;
+                city = places[0].city;
+                userLocation = street + " , " + city;
 
             } else {
                 address = "No address found";
@@ -39,7 +39,7 @@ Titanium.Geolocation.purpose = "Recieve User Location";
         addRoute({
         map: map,
         region: 'UK',
-        start: gebruikerLocatie,
+        start: userLocation,
         stop: 'Zeedijk 1, Amsterdam'
     });
     });
@@ -99,7 +99,7 @@ function addRoute(obj) {
         var eindLocatieLat = json.routes[0].legs[0].end_location.lat;
         var eindLocatieLng = json.routes[0].legs[0].end_location.lng;
     
-     annotations2 = Ti.Map.createAnnotation({
+     annotation = Ti.Map.createAnnotation({
         latitude: eindLocatieLat,
         longitude: eindLocatieLng,
         title: 'Title B',
@@ -108,7 +108,7 @@ function addRoute(obj) {
         animate: true,
    });
    
-   map.addAnnotation(annotations2);
+   map.addAnnotation(annotation);
      
         for (intStep = 0; intStep < intSteps; intStep++) {
             decodedPolyline = decodeLine(step[intStep].polyline.points);
