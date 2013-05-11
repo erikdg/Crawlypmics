@@ -1,15 +1,34 @@
 Ti.UI.setBackgroundColor('#000');
 
-var annotation;
+var annotations2;
 
-var street;
-var city;
-var userLocation;
+var straat;
+var plaats;
+var gebruikerLocatie;
 var places;
 var currentLongitude;
 var currentLatitude;
-                
-Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
+var map;
+var region;
+
+function currentLocationAddRoute(){
+	
+	var db = Ti.Database.install('quiz3.sqlite','crawlympicsAdressen');
+	
+	var selectDeelnemersgroep = db.execute('SELECT groepID, cafe1 FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
+	var deelnemersGroepID = selectDeelnemersgroep.fieldByName('groepID');
+	
+	var selectDeelnemers = db.execute('SELECT welkCafe FROM deelnemersgroep WHERE groepID = ?', deelnemersGroepID);
+	var ditCafe = selectDeelnemers.fieldByName('welkCafe');
+	
+	// Tel het aantal deelnemers in de groep
+	var selectCafe = db.execute('SELECT cafeID, adres FROM cafe WHERE rowid = ?', ditCafe);
+	var cafeAdres = selectCafe.fieldByName('adres');
+
+db.close()
+	// console.log(cafeAdres);
+	
+	Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 Titanium.Geolocation.distanceFilter = .25;
 Titanium.Geolocation.purpose = "Recieve User Location";
 
@@ -27,9 +46,9 @@ Titanium.Geolocation.purpose = "Recieve User Location";
         if (evt.success) {
             places = evt.places;
             if (places && places.length) {
-                street = places[0].street;
-                city = places[0].city;
-                userLocation = street + " , " + city;
+                straat = places[0].street;
+                plaats = places[0].city;
+                gebruikerLocatie = straat + " , " + plaats;
 
             } else {
                 address = "No address found";
@@ -39,13 +58,18 @@ Titanium.Geolocation.purpose = "Recieve User Location";
         addRoute({
         map: map,
         region: 'UK',
-        start: userLocation,
-        stop: 'Zeedijk 1, Amsterdam'
+        start: gebruikerLocatie,
+        stop: cafeAdres
     });
     });
    
    
-    });             
+    }); 
+	
+}
+
+currentLocationAddRoute();
+                         
                 
 function decodeLine(encoded) {
     var len = encoded.length;
@@ -99,7 +123,7 @@ function addRoute(obj) {
         var eindLocatieLat = json.routes[0].legs[0].end_location.lat;
         var eindLocatieLng = json.routes[0].legs[0].end_location.lng;
     
-     annotation = Ti.Map.createAnnotation({
+     annotations2 = Ti.Map.createAnnotation({
         latitude: eindLocatieLat,
         longitude: eindLocatieLng,
         title: 'Title B',
@@ -108,7 +132,7 @@ function addRoute(obj) {
         animate: true,
    });
    
-   map.addAnnotation(annotation);
+   map.addAnnotation(annotations2);
      
         for (intStep = 0; intStep < intSteps; intStep++) {
             decodedPolyline = decodeLine(step[intStep].polyline.points);
@@ -154,13 +178,14 @@ function addRoute(obj) {
     xhr.send();
 }
 
-var kaart = Ti.UI.createWindow({
+var win = Ti.UI.createWindow({
     backgroundColor: '#fff',
     title: 'Test'
 });
 
 
-var	region = {
+function addMap(){
+region = {
     latitude: 52.376303,
     longitude: 4.900146,
     latitudeDelta: .01,
@@ -169,7 +194,7 @@ var	region = {
 
 
 
-var map = Ti.Map.createView({
+map = Ti.Map.createView({
     animate: true,
     bottom: 0,
     height: Ti.UI.FILL,
@@ -180,5 +205,33 @@ var map = Ti.Map.createView({
     visible: true,
     width: Ti.UI.FILL
 });
-kaart.add(map);
+win.add(map);
+}
 
+addMap();
+
+var button = Ti.UI.createButton({
+   	    	buttonName : 'refresh kaart',
+   	    	title : 'refresh kaart',
+   	    	width : '230dp',
+   	    	height : '30dp',
+        	top: '10dp'
+   		});
+    	
+win.add(button);  
+    
+    
+    button.addEventListener('click',function(e){
+     			var db = Ti.Database.install('quiz3.sqlite','crawlympicsAdressen');
+				var selectDeelnemersgroep = db.execute('SELECT groepID, welkCafe FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
+				var deelnemersGroepID = selectDeelnemersgroep.fieldByName('groepID');
+				var ditCafe = selectDeelnemersgroep.fieldByName('welkCafe');
+        		var insertStrafregel = db.execute('UPDATE deelnemersgroep SET welkCafe= welkCafe+1 WHERE groepID = ?', deelnemersGroepID);
+        		win.remove(map);	
+        		currentLocationAddRoute()
+        		addMap();
+        		
+        		db.close();
+    });
+    
+    win.open();
