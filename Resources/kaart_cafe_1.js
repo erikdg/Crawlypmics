@@ -13,7 +13,7 @@ var region;
 
 function currentLocationAddRoute(){
 	
-	var db = Ti.Database.install('quiz3.sqlite','crawlympicsAdressen');
+	var db = Ti.Database.install('quiz2.sqlite','crawlympics');
 	
 	var selectDeelnemersgroep = db.execute('SELECT groepID, cafe1 FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
 	var deelnemersGroepID = selectDeelnemersgroep.fieldByName('groepID');
@@ -25,7 +25,7 @@ function currentLocationAddRoute(){
 	var selectCafe = db.execute('SELECT cafeID, adres FROM cafe WHERE rowid = ?', ditCafe);
 	var cafeAdres = selectCafe.fieldByName('adres');
 
-db.close()
+	db.close()
 	// console.log(cafeAdres);
 	
 	Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
@@ -178,7 +178,7 @@ function addRoute(obj) {
     xhr.send();
 }
 
-var win = Ti.UI.createWindow({
+var kaart = Ti.UI.createWindow({
     backgroundColor: '#fff',
     title: 'Test'
 });
@@ -205,7 +205,7 @@ map = Ti.Map.createView({
     visible: true,
     width: Ti.UI.FILL
 });
-win.add(map);
+kaart.add(map);
 }
 
 addMap();
@@ -218,20 +218,19 @@ var button = Ti.UI.createButton({
         	top: '10dp'
    		});
     	
-win.add(button);  
+kaart.add(button);  
     
     
     button.addEventListener('click',function(e){
-     			var db = Ti.Database.install('quiz3.sqlite','crawlympicsAdressen');
+     			var db = Ti.Database.install('quiz2.sqlite','crawlympics');
 				var selectDeelnemersgroep = db.execute('SELECT groepID, welkCafe FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
 				var deelnemersGroepID = selectDeelnemersgroep.fieldByName('groepID');
 				var ditCafe = selectDeelnemersgroep.fieldByName('welkCafe');
         		var insertStrafregel = db.execute('UPDATE deelnemersgroep SET welkCafe= welkCafe+1 WHERE groepID = ?', deelnemersGroepID);
-        		win.remove(map);	
+        		kaart.remove(map);	
         		currentLocationAddRoute()
         		addMap();
-        		
         		db.close();
     });
     
-    win.open();
+    

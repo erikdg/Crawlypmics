@@ -70,6 +70,8 @@ btnSubmit.addEventListener('click',function(e) {
 			alert('Hier gaat iets mis');
 		}
 		
+		db.close();
+		
 		// Naar het volgende scherm
 		kaart.open();
 	};
