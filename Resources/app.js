@@ -4,7 +4,6 @@
  * Communication and Multimedia Design
  * I.o.v. Amsterdam Museum
  */
-
 Titanium.include('gebruikersToevoegen.js');
 
 // Database aanroepen
