@@ -5,10 +5,10 @@
  * I.o.v. Amsterdam Museum
  */
 
-Titanium.include('strafregelBedenken.js');
+Titanium.include('kaart.js');
 
 // Database aanroepen
-var db = Ti.Database.install('quiz2.sqlite','crawlympics');
+var db = Ti.Database.install('quiz3.sqlite','crawlympics');
 
 var gebruikersToevoegen = Ti.UI.createWindow({
   backgroundColor: 'blue'
@@ -144,8 +144,8 @@ btnSubmit.addEventListener('click',function(e) {
 			var insertNaam4 = db.execute('INSERT INTO deelnemers (naam, score, groepID) VALUES ("'+deelnemer_naam_4.value+'", 0, ?)', groepID);
 			var insertNaam5 = db.execute('INSERT INTO deelnemers (naam, score, groepID) VALUES ("'+deelnemer_naam_5.value+'", 0, ?)', groepID);
 		} 
-		
-		strafregelBedenken.open();
+		db.close();
+		kaart.open();
 	};
 
 

@@ -8,14 +8,14 @@
 Titanium.include('gebruikersToevoegen.js');
 
 // Database aanroepen
-var db = Ti.Database.install('quiz2.sqlite','crawlympics');
+var db = Ti.Database.install('quiz3.sqlite','crawlympics');
 
 var win = Ti.UI.createWindow({
   backgroundColor: 'blue'
 });
 
 var btn1 = Ti.UI.createButton({
-	title:'SPORT',
+	title:'GOUDEN EEUW',
 	top:30,
 	width:130,
 	height:35,
@@ -24,7 +24,7 @@ var btn1 = Ti.UI.createButton({
 });
 
 var btn2 = Ti.UI.createButton({
-	title:'BINNENSTAD',
+	title:'SPORT',
 	top:130,
 	width:130,
 	height:35,

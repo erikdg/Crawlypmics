@@ -1,5 +1,6 @@
 Ti.UI.setBackgroundColor('#000');
 
+Titanium.include('strafregelBedenken.js');
 var annotations2;
 
 var straat;
@@ -13,7 +14,7 @@ var region;
 
 function currentLocationAddRoute(){
 	
-	var db = Ti.Database.install('quiz2.sqlite','crawlympics');
+	var db = Ti.Database.install('quiz3.sqlite','crawlympics');
 	
 	var selectDeelnemersgroep = db.execute('SELECT groepID, cafe1 FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
 	var deelnemersGroepID = selectDeelnemersgroep.fieldByName('groepID');
@@ -212,7 +213,7 @@ addMap();
 
 var button = Ti.UI.createButton({
    	    	buttonName : 'refresh kaart',
-   	    	title : 'refresh kaart',
+   	    	title : 'Ik ben er!',
    	    	width : '230dp',
    	    	height : '30dp',
         	top: '10dp'
@@ -222,15 +223,18 @@ kaart.add(button);
     
     
     button.addEventListener('click',function(e){
-     			var db = Ti.Database.install('quiz2.sqlite','crawlympics');
+     			var db = Ti.Database.install('quiz3.sqlite','crawlympics');
 				var selectDeelnemersgroep = db.execute('SELECT groepID, welkCafe FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
 				var deelnemersGroepID = selectDeelnemersgroep.fieldByName('groepID');
 				var ditCafe = selectDeelnemersgroep.fieldByName('welkCafe');
         		var insertStrafregel = db.execute('UPDATE deelnemersgroep SET welkCafe= welkCafe+1 WHERE groepID = ?', deelnemersGroepID);
         		kaart.remove(map);	
-        		currentLocationAddRoute()
+        		currentLocationAddRoute();
         		addMap();
         		db.close();
+        		
+        		strafregelBedenken.open();
+        		
     });
     
     

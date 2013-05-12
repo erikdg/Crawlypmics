@@ -5,10 +5,7 @@
  * I.o.v. Amsterdam Museum
  */
 
-Titanium.include('kaart_cafe_1.js');
-
-// Database aanroepen
-var db = Ti.Database.install('quiz2.sqlite','crawlympics');
+Titanium.include('vraagMeerkeuze.js');
 
 var strafregelBedenken = Ti.UI.createWindow({
   backgroundColor: 'blue'
@@ -45,11 +42,10 @@ btnSubmit.addEventListener('click',function(e) {
 		var dbData = {
 			textField: textField.value
 		};
+		var db = Ti.Database.install('quiz3.sqlite','crawlympics');
+		var selectDeelnemersgroep = db.execute('SELECT groepID FROM deelnemersgroep WHERE groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
+		var groepIDsb = selectDeelnemersgroep.fieldByName('groepID');
 		
-		
-		// Checken in welke deelnemersgroep we zitten
-		var sql = db.execute('SELECT groepID FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
-		var groepID = sql.fieldByName('groepID');
 		
 		// Kijken in welke ronde we zitten
 		var sql = db.execute('SELECT strafregel_ronde1 FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
@@ -61,19 +57,20 @@ btnSubmit.addEventListener('click',function(e) {
 	
 		// Strafregel in db toevoegen bij de juiste ronde
 		if (strafregel_ronde1 === null && strafregel_ronde2 === null && strafregel_ronde3 === null) {
-			var insertStrafregel = db.execute('UPDATE deelnemersgroep SET strafregel_ronde1 = "'+textField.value+'" WHERE groepID =?', groepID);
+			var insertStrafregel = db.execute('UPDATE deelnemersgroep SET strafregel_ronde1 = "'+textField.value+'" WHERE groepID =?', groepIDsb);
 		} else if (strafregel_ronde1 !== null && strafregel_ronde2 === null && strafregel_ronde3 === null) {
-			var insertStrafregel = db.execute('UPDATE deelnemersgroep SET strafregel_ronde2 = "'+textField.value+'" WHERE groepID =?', groepID);
+			var insertStrafregel = db.execute('UPDATE deelnemersgroep SET strafregel_ronde2 = "'+textField.value+'" WHERE groepID =?', groepIDsb);
 		} else if (strafregel_ronde1 !== null && strafregel_ronde2 !== null && strafregel_ronde3 === null) {
-			var insertStrafregel = db.execute('UPDATE deelnemersgroep SET strafregel_ronde3 = "'+textField.value+'" WHERE groepID =?', groepID);
+			var insertStrafregel = db.execute('UPDATE deelnemersgroep SET strafregel_ronde3 = "'+textField.value+'" WHERE groepID =?', groepIDsb);
 		} else {
 			alert('Hier gaat iets mis');
 		}
 		
 		db.close();
-		
 		// Naar het volgende scherm
-		kaart.open();
+	
+		vraagMeerkeuze.open();
 	};
 
 });
+

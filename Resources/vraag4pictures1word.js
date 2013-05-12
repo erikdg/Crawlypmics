@@ -5,28 +5,29 @@
  * I.o.v. Amsterdam Museum
  */
 
-Titanium.include('vraag4pictures1word.js');
-var vraagMeerkeuze = Ti.UI.createWindow({
-  backgroundColor: 'white'
+var vraag4pictures1word = Ti.UI.createWindow({
+  backgroundColor: 'blue'
 });
 
-	var titel;
-	var vraagTonen;
-	var brandView;
 
-function vraagToevoegen() {
+	var vraagZelf;
+	var fotoVraagTonen;
+	var fotoView;
+
+function vraagToevoegenTwee() {
 	
+
 	// Database aanroepen
 	var db = Ti.Database.install('quiz3.sqlite','crawlympics');
 	// Checken in welke deelnemersgroep we zitten
-	var selectDeelnemersgroep = db.execute('SELECT groepID, cafe1 FROM deelnemersgroep WHERE groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
+	var selectDeelnemersgroep = db.execute('SELECT groepID, cafe1 FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
 	var deelnemersGroepID = selectDeelnemersgroep.fieldByName('groepID');
 	var deelnemersCafe1 = selectDeelnemersgroep.fieldByName('cafe1');
 	
 	// Tel het aantal deelnemers in de groep
 	var selectAantalDeelnemers = db.execute('SELECT count(groepID) FROM deelnemers WHERE groepID = ?', deelnemersGroepID);
 	var aantalDeelnemers = selectAantalDeelnemers.fieldByName('count(groepID)');
-	
+		
 	// Lees deelnemers uit de deelnemerstabel
 	var selectDeelnemers = db.execute('SELECT deelnemerID, naam FROM deelnemers WHERE groepID = ? AND rowid = ?', deelnemersGroepID, deelnemersCafe1);
 	var naam = selectDeelnemers.fieldByName('naam');
@@ -39,7 +40,7 @@ function vraagToevoegen() {
 	var cafeNaam = selectCafe.fieldByName('cafe_naam');
 		
 	// Haal vraag random op
-	var selectVraag = db.execute("SELECT vraag, vraagID FROM vragen WHERE cafeID=? AND vraag_type=1 ORDER BY RANDOM()", cafeCafeID);
+	var selectVraag = db.execute("SELECT vraag, vraagID FROM vragen WHERE cafeID=? AND vraag_type=2 ORDER BY RANDOM()", cafeCafeID);
 	var vragenVraagID = selectVraag.fieldByName('vraagID');
 	var vragenVraag = selectVraag.fieldByName('vraag');
  
@@ -48,10 +49,8 @@ function vraagToevoegen() {
 	var antwoordenAntwoord = selectAntwoorden.fieldByName('antwoord');
 	var antwoordenGoedfout = selectAntwoorden.fieldByName('goedfout');
 	
-	
-	
 	// Toon voor wie de vraag is
-	titel = Ti.UI.createLabel({
+	vraagZelf = Ti.UI.createLabel({
     	color: 'black',
     	text: 'Deze vraag is voor '+ naam + '',
     	font: { fontSize: 14, fontFamily: 'Helvetica Neue' },
@@ -61,7 +60,7 @@ function vraagToevoegen() {
 	});
 
 	// Toon de vraag
-	vraagTonen = Ti.UI.createLabel({
+	fotoVraagTonen = Ti.UI.createLabel({
     	color: 'black',
     	text: ''+ vragenVraag + '',
     	font: { fontSize: 15, fontFamily: 'Helvetica Neue' },
@@ -72,43 +71,84 @@ function vraagToevoegen() {
 	
 	// Toon de antwoorden
 	// Primary view voor de buttons
-	brandView = Ti.UI.createView({
+	fotoView = Ti.UI.createView({
    		title : 'Hello',
     	width : '100%',
    		height : '100%',
-    	top: '190dp',
-    	layout: 'vertical'
+   		
+    	top: '140dp',
+    	layout: 'horizontal'
 	});
 	
-	
-	var buttonArray = [];
-	
+
+	var count=0;
 	// fetch rows
 	while (selectAntwoorden.isValidRow()) {
- 		
+		
+		if(count==0) {
    		//create Button with name and title
-   		var myButton = Ti.UI.createButton({
-   	    	buttonName : selectAntwoorden.fieldByName('antwoord'),
-   	    	title : selectAntwoorden.fieldByName('antwoord'),
-   	    	tagsID : selectAntwoorden.fieldByName('goedfout'),
-   	    	width : '230dp',
-   	    	height : '30dp',
-        	top: '10dp'
-   		});
-    	
-    	addlistener(myButton);
+   			var myButton = Ti.UI.createButton({
+		  		backgroundImage: '/images/'+selectAntwoorden.fieldByName('antwoord')+'',
+		  		backgroundSelectedImage: '/images/'+selectAntwoorden.fieldByName('antwoord')+'',
+		  		buttonName : selectAntwoorden.fieldByName('antwoord'),
+   	    		tagsID : selectAntwoorden.fieldByName('goedfout'),
+   	    		width : '140dp',
+   	    		height : '140dp',
+        		top: '12dp',
+        		left: '10dp'
+			});
+		}
+		
+		if(count==1) {
+   		//create Button with name and title
+   			var myButton = Ti.UI.createButton({
+		  		backgroundImage: '/images/'+selectAntwoorden.fieldByName('antwoord')+'',
+		  		backgroundSelectedImage: '/images/'+selectAntwoorden.fieldByName('antwoord')+'',
+		  		buttonName : selectAntwoorden.fieldByName('antwoord'),
+   	    		tagsID : selectAntwoorden.fieldByName('goedfout'),
+   	    		width : '140dp',
+   	    		height : '140dp',
+        		top: '10dp',
+        		left: '12dp'
+			});
+		}
+		if(count==2) {
+   		//create Button with name and title
+   			var myButton = Ti.UI.createButton({
+		  		backgroundImage: '/images/'+selectAntwoorden.fieldByName('antwoord')+'',
+		  		backgroundSelectedImage: '/images/'+selectAntwoorden.fieldByName('antwoord')+'',
+		  		buttonName : selectAntwoorden.fieldByName('antwoord'),
+   	    		tagsID : selectAntwoorden.fieldByName('goedfout'),
+   	    		width : '140dp',
+   	    		height : '140dp',
+        		top: '10dp',
+        		left: '12dp'
+			});
+		}
+		if(count==3) {
+   		//create Button with name and title
+   			var myButton = Ti.UI.createButton({
+		  		backgroundImage: '/images/'+selectAntwoorden.fieldByName('antwoord')+'',
+		  		backgroundSelectedImage: '/images/'+selectAntwoorden.fieldByName('antwoord')+'',
+		  		buttonName : selectAntwoorden.fieldByName('antwoord'),
+   	    		tagsID : selectAntwoorden.fieldByName('goedfout'),
+   	    		width : '40dp',
+   	    		height : '40dp',
+        		top: '10dp',
+        		right: '10dp'
+			});
+		}
+    	addlistenerTwee(myButton);
     
     	// Button toevoegen aan de view
-		brandView.add(myButton);
- 
-    	// push button to array, if we maybe need it later
-		buttonArray.push(myButton);
+		fotoView.add(myButton);
+ 		count++;
  
     	// get next row
   		selectAntwoorden.next();
     	
 	}
-	
+
 	// always close rowset and db connection!
 	selectAntwoorden.close();
 	
@@ -117,22 +157,23 @@ function vraagToevoegen() {
 
 	if (deelnemersCafe1 < aantalDeelnemers +1) {
 		
-		vraagMeerkeuze.add(brandView);
-		vraagMeerkeuze.add(vraagTonen);
-		vraagMeerkeuze.add(titel);
-		
+		vraag4pictures1word.add(fotoView);
+		vraag4pictures1word.add(fotoVraagTonen);
+		vraag4pictures1word.add(vraagZelf);
 	} else {		
        	db.execute('UPDATE deelnemersgroep SET cafe1=1 WHERE groepID = ?', deelnemersGroepID);
  		db.close();
- 		vraag4pictures1word.open();
+		alert('Doeeeeg. Hier moet de volgende pagina worden geopend!');
 	}
 	db.close();
 };
-
 	
 	
 
-	function addlistener(inobj) {
+	vraagToevoegenTwee();
+	
+
+	function addlistenerTwee(inobj) {
            inobj.addEventListener('click',function(e){
             if (e.source.tagsID === 1) {
  	
@@ -140,7 +181,7 @@ function vraagToevoegen() {
                 
  				// Sla op bij welke vraag het spel is
  				var selectDeelnemersgroep = db.execute('SELECT groepID, cafe1 FROM deelnemersgroep WHERE deelnemersgroep.groepID = (SELECT MAX(groepID) FROM deelnemersgroep)');
-                var deelnemersGroepID = selectDeelnemersgroep.fieldByName('groepID');
+              	var deelnemersGroepID = selectDeelnemersgroep.fieldByName('groepID');
                 var deelnemersCafe1 = selectDeelnemersgroep.fieldByName('cafe1');
                 db.execute('UPDATE deelnemersgroep SET cafe1= cafe1+1 WHERE groepID = ?', deelnemersGroepID);
  
@@ -152,11 +193,11 @@ function vraagToevoegen() {
 				var deelnemerDeelnemerID = selectDeelnemers.fieldByName('deelnemerID');
 				db.execute('UPDATE deelnemers SET score= score+1 WHERE deelnemerID = ?', deelnemerDeelnemerID);
 	
-                vraagMeerkeuze.remove(titel);    
-                vraagMeerkeuze.remove(vraagTonen);
-                vraagMeerkeuze.remove(brandView);
+                vraag4pictures1word.remove(vraagZelf);    
+                vraag4pictures1word.remove(vraagTonen);
+                vraag4pictures1word.remove(fotoView);
  				db.close();
-                vraagToevoegen();
+                vraagToevoegenTwee();
  				
                 
             } else if (e.source.tagsID === 0) {
@@ -168,17 +209,16 @@ function vraagToevoegen() {
                 db.execute('UPDATE deelnemersgroep SET cafe1= cafe1+1 WHERE groepID = ?', deelnemersGroepID);
  
                 alert('Het antwoord is fout.');
-                vraagMeerkeuze.remove(titel);    
-                vraagMeerkeuze.remove(vraagTonen);
-                vraagMeerkeuze.remove(brandView);
+                vraag4pictures1word.remove(vraagZelf);    
+                vraag4pictures1word.remove(fotoVraagTonen);
+                vraag4pictures1word.remove(fotoView);
  				db.close();
-                vraagToevoegen();
+                vraagToevoegenTwee();
                 
             } 
         });
         return;
     }
-	
 	
 	
 	
