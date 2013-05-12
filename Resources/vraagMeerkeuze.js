@@ -32,6 +32,7 @@ function vraagToevoegen() {
 	var naam = selectDeelnemers.fieldByName('naam');
 	var deelnemerDeelnemerID = selectDeelnemers.fieldByName('deelnemerID');
 	
+	console.log(naam);
 	
 	// Haal cafes op bij gekozen thema
 	var selectCafe = db.execute("SELECT DISTINCT cafe.cafeID, cafe.cafe_naam, cafe.themaID FROM cafe INNER JOIN deelnemersgroep ON cafe.themaID = deelnemersgroep.themaID WHERE groepID = ? LIMIT 1", deelnemersGroepID);
@@ -181,5 +182,4 @@ function vraagToevoegen() {
 	
 	
 	
-	
-	
+	vraagToevoegen();

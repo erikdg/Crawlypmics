@@ -70,6 +70,7 @@ btnSubmit.addEventListener('click',function(e) {
 		// Naar het volgende scherm
 	
 		vraagMeerkeuze.open();
+		
 	};
 
 });
