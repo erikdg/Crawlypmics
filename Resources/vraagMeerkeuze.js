@@ -13,7 +13,7 @@ var vraagMeerkeuze = Ti.UI.createWindow({
 	var titel;
 	var vraagTonen;
 	var brandView;
-
+	
 function vraagToevoegen() {
 	
 	// Database aanroepen
